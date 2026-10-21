@@ -1,0 +1,12 @@
+ecommerce_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: 127.0.0.1
+      port: 5432
+      user: postgres
+      password: "{{ env_var('PG_PASSWORD') }}"
+      dbname: ecommerce_staging
+      schema: analytics
+      threads: 4
