@@ -1,10 +1,23 @@
 # E-commerce Customer Growth, Retention, and Revenue Analytics Platform
 
 ## Status
-Phase 1 (MVP) complete.
+Phase 1 (MVP) complete. Phase 2 (dbt warehouse) in progress.
 
 ## Flow
-Synthetic data (Python, Faker) -> Clean (pandas) -> SQLite -> SQL metrics -> Power BI
+Synthetic data (Python, Faker) -> PostgreSQL `raw` schema -> dbt staging views -> dbt marts (star schema) -> Power BI
+
+## Warehouse
+- Database: PostgreSQL `ecommerce_staging`
+- Schemas: `raw` (loaded data), `analytics` (dbt models)
+- Staging: `stg_customers`, `stg_products`, `stg_orders`, `stg_order_items`
+- Marts: `dim_customers`, `dim_products`, `fact_order_items`
+- Tests: 10 dbt data tests, all passing
+
+## Run dbt
+1. Set the password: `$env:PG_PASSWORD = "your-password"`
+2. `cd ecommerce_dbt`
+3. `dbt run`
+4. `dbt test`
 
 ## Folders
 - `src/data_generation`: creates raw CSV data
