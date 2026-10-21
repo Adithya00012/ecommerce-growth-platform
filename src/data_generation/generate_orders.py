@@ -14,7 +14,10 @@ for _, c in customers.iterrows():
     signup = c.signup_date.date()
     days_available = (today - signup).days
     for _ in range(n_orders):
-        order_date = signup + timedelta(days=random.randint(0, days_available))
+        offset = int(random.expovariate(1 / 120))
+        if offset > days_available:
+            continue
+        order_date = signup + timedelta(days=offset)
         rows.append(
             {
                 "order_id": order_id,

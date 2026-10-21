@@ -15,10 +15,10 @@ Synthetic data (Python, Faker) -> Clean (pandas) -> SQLite -> SQL metrics -> Pow
 - `dashboards`: Power BI file
 
 ## Metrics built
-- Total revenue: 4,358,811.99
-- Average order value: 277.83
-- Gross margin: 40.39%
-- Repeat-purchase rate: 55.13%
+- Total revenue: 3,657,186.57
+- Average order value: 277.71
+- Gross margin: 40.38%
+- Repeat-purchase rate: 50.24%
 
 ## How to run
 1. `venv\Scripts\activate`
@@ -31,4 +31,4 @@ Synthetic data (Python, Faker) -> Clean (pandas) -> SQLite -> SQL metrics -> Pow
 8. `python src\export\export_for_powerbi.py`
 
 ## Known issues
-- Order dates skew toward recent months. Revenue growth is artificial.
+- None.
