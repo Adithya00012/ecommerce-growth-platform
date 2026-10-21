@@ -3,3 +3,7 @@ __pycache__/
 data/
 *.db
 .env
+logs/
+target/
+.user.yml
+dbt_packages/
