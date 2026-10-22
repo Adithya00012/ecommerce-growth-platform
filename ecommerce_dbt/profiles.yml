@@ -10,3 +10,13 @@ ecommerce_dbt:
       dbname: ecommerce_staging
       schema: analytics
       threads: 4
+    snowflake:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: DBT_ROLE
+      warehouse: ECOMMERCE_WH
+      database: ECOMMERCE
+      schema: ANALYTICS
+      threads: 4

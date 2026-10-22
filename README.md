@@ -1,23 +1,24 @@
 # E-commerce Customer Growth, Retention, and Revenue Analytics Platform
 
 ## Status
-Phase 1 (MVP) complete. Phase 2 (dbt warehouse) in progress.
+Phase 1 (MVP) and Phase 2 (warehouse and dbt) complete.
 
 ## Flow
 Synthetic data (Python, Faker) -> PostgreSQL `raw` schema -> dbt staging views -> dbt marts (star schema) -> Power BI
 
 ## Warehouse
-- Database: PostgreSQL `ecommerce_staging`
-- Schemas: `raw` (loaded data), `analytics` (dbt models)
+- Local: PostgreSQL `ecommerce_staging` (schemas `raw`, `analytics`)
+- Cloud: Snowflake `ECOMMERCE` (schemas `RAW`, `ANALYTICS`)
 - Staging: `stg_customers`, `stg_products`, `stg_orders`, `stg_order_items`
-- Marts: `dim_customers`, `dim_products`, `fact_order_items`
-- Tests: 10 dbt data tests, all passing
+- Marts: `dim_customers`, `dim_products`, `fact_order_items`, `mart_daily_revenue`
+- Tests: 15 dbt data tests, passing on both databases
 
 ## Run dbt
-1. Set the password: `$env:PG_PASSWORD = "your-password"`
+1. Load `.env` into the shell:
+   `Get-Content .env | ForEach-Object { if ($_ -match '^([^=]+)=(.*)$') { Set-Item "Env:$($matches[1])" $matches[2] } }`
 2. `cd ecommerce_dbt`
-3. `dbt run`
-4. `dbt test`
+3. Postgres: `dbt build`
+4. Snowflake: `dbt build --target snowflake`
 
 ## Folders
 - `src/data_generation`: creates raw CSV data
