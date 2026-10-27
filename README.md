@@ -1,7 +1,7 @@
 # E-commerce Customer Growth, Retention, and Revenue Analytics Platform
 
 ## Status
-Phase 1 (MVP) and Phase 2 (warehouse and dbt) complete.
+Phases 1 to 3 complete: MVP, warehouse and dbt, customer growth and retention.
 
 ## Flow
 Synthetic data (Python, Faker) -> PostgreSQL `raw` schema -> dbt staging views -> dbt marts (star schema) -> Power BI
@@ -10,8 +10,19 @@ Synthetic data (Python, Faker) -> PostgreSQL `raw` schema -> dbt staging views -
 - Local: PostgreSQL `ecommerce_staging` (schemas `raw`, `analytics`)
 - Cloud: Snowflake `ECOMMERCE` (schemas `RAW`, `ANALYTICS`)
 - Staging: `stg_customers`, `stg_products`, `stg_orders`, `stg_order_items`
-- Marts: `dim_customers`, `dim_products`, `fact_order_items`, `mart_daily_revenue`
-- Tests: 15 dbt data tests, passing on both databases
+- Intermediate: `int_orders`
+- Marts: `dim_customers`, `dim_products`, `fact_order_items`, `mart_daily_revenue`, `mart_new_vs_returning_monthly`, `mart_customer_rfm`, `mart_retention_cohorts`, `mart_cohort_matrix`, `mart_customer_ltv`, `mart_customer_churn`, `mart_repeat_purchase`
+- Tests: 33 dbt data tests, passing on both databases
+
+## Phase 3 metrics (validated against pandas)
+- New customers: 6,971
+- Repeat buyers: 3,502 (50.24%)
+- Retention: 30-day 20.5%, 60-day 32.7%, 90-day 40.5%
+- Total CLV (gross profit): 1,476,837.64. Average per customer: 211.85
+- Churn (no order in 90 days): 5,484 customers, 78.67%
+
+## Known limitation
+Synthetic customers order within about four months of signup, then stop. Churn is inflated.
 
 ## Run dbt
 1. Load `.env` into the shell:
